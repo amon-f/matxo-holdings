@@ -1,0 +1,36 @@
+---
+import { siteBase as base } from '../utils/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell footer-main">
+    <div class="footer-brand-block">
+      <a class="brand footer-brand" href={base} aria-label="Matxo Holdings home">
+        <span class="brand-roof" aria-hidden="true"></span>
+        <span class="brand-name">MATXO</span>
+        <span class="brand-sub">HOLDINGS LTD</span>
+      </a>
+      <p>Cleaning and maintenance services for buildings.</p>
+      <span class="footer-principles">Professional <i>·</i> Reliable <i>·</i> Safe</span>
+    </div>
+    <div class="footer-links">
+      <h2>Explore</h2>
+      <a href={`${base}#services`}>Services</a>
+      <a href={`${base}#safety`}>Safety</a>
+      <a href={`${base}projects`}>Projects</a>
+      <a href={`${base}about`}>About Matxo</a>
+    </div>
+    <div class="footer-links footer-contact-links">
+      <h2>Get in touch</h2>
+      <a href="tel:+254723234846">0723 234 846</a>
+      <a href="https://wa.me/254723234846" target="_blank" rel="noreferrer">WhatsApp Matxo <span aria-hidden="true">↗</span></a>
+      <a href={`${base}contact`}>Request a quote</a>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {year} Matxo Holdings Ltd</span>
+    <a href={base}>Clean spaces. Safer places.</a>
+  </div>
+</footer>

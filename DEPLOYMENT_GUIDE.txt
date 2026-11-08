@@ -1,0 +1,165 @@
+MATXO HOLDINGS WEBSITE
+GITHUB REPOSITORY AND LIVE REVIEW SITE DEPLOYMENT GUIDE
+=========================================================
+
+This guide explains how to create the GitHub repository named matxo-holding,
+upload this project, publish it with GitHub Pages, and get the live URL to
+share with the client.
+
+WHAT YOU NEED
+-------------
+1. A GitHub account that you can sign into.
+2. Git installed on your computer and available in PowerShell.
+3. Node.js and npm installed (for optional local build verification).
+4. This project folder: C:\Users\progr\Documents\matxo-website
+5. An internet connection.
+
+The site is a static Astro website. The included GitHub Actions workflow builds
+the site and publishes it whenever code is pushed to the main or master branch.
+The Astro configuration reads the GitHub repository name during the build and
+sets the correct GitHub Pages path automatically.
+
+PART 1 — CREATE THE GITHUB REPOSITORY
+-------------------------------------
+1. Sign into https://github.com/.
+2. Select the + menu in the upper-right corner, then select New repository.
+3. Set Repository name to exactly:
+
+       matxo-holding
+
+4. Select the repository owner (your personal account or the Matxo organization).
+5. Choose Public if the client should be able to open the review website without
+   signing in. The website itself will be publicly accessible at its Pages URL.
+6. Leave Add a README file, Add .gitignore, and Choose a license unchecked.
+   This project already has files, so creating an empty repository avoids an
+   unrelated first-push merge conflict.
+7. Select Create repository.
+8. Keep the new repository page open. Its address will look like:
+
+       https://github.com/GITHUB-OWNER/matxo-holding
+
+   Replace GITHUB-OWNER in the commands below with the account or organization
+   name shown in that address.
+
+PART 2 — UPLOAD THIS PROJECT FROM POWERSHELL
+--------------------------------------------
+1. Open PowerShell.
+2. Move into the project folder:
+
+       cd C:\Users\progr\Documents\matxo-website
+
+3. Optional: verify the production build locally:
+
+       npm install
+       npm run build
+
+   A successful build reports that five pages were built. The generated site is
+   placed in the dist folder. Do not upload dist by itself; GitHub Actions builds
+   from the source files.
+
+4. Stage the project files and create the first commit:
+
+       git add -A
+       git commit -m "Prepare Matxo Holdings website for deployment"
+
+   If Git reports that your name or email is not configured, set them for this
+   repository and repeat the commit:
+
+       git config user.name "Your Name"
+       git config user.email "you@example.com"
+       git commit -m "Prepare Matxo Holdings website for deployment"
+
+5. Set the branch name to main:
+
+       git branch -M main
+
+6. Connect this local project to the new GitHub repository. Replace GITHUB-OWNER
+   with the owner in the repository URL from Part 1:
+
+       git remote add origin https://github.com/GITHUB-OWNER/matxo-holding.git
+
+   If Git says that origin already exists, update it instead:
+
+       git remote set-url origin https://github.com/GITHUB-OWNER/matxo-holding.git
+
+7. Push the project to GitHub:
+
+       git push -u origin main
+
+8. If Git asks you to authenticate, complete the GitHub sign-in prompt opened by
+   Git Credential Manager or use the approved authentication method for your
+   account. Do not put a password or access token into this text file or a command.
+
+PART 3 — TURN ON GITHUB PAGES
+-----------------------------
+1. On GitHub, open the matxo-holding repository.
+2. Select Settings.
+3. In the left sidebar, open Pages (under Code and automation).
+4. Under Build and deployment, set Source to GitHub Actions.
+5. You do not need to choose a branch or upload a dist folder in the Pages
+   settings. The repository already contains the deployment workflow.
+
+PART 4 — WAIT FOR THE DEPLOYMENT AND GET THE LIVE LINK
+------------------------------------------------------
+1. Open the repository's Actions tab.
+2. Select the workflow named Deploy to GitHub Pages.
+3. Open the run started by the push to main. Wait for both the build and deploy
+   jobs to finish successfully (green check marks).
+4. Open Settings, then Pages. GitHub shows the published site address there.
+   The address for this project repository will normally be:
+
+       https://GITHUB-OWNER.github.io/matxo-holding/
+
+   Replace GITHUB-OWNER with the account or organization name. For example, if
+   the repository is https://github.com/matxoholdings/matxo-holding, the site
+   address will normally be:
+
+       https://matxoholdings.github.io/matxo-holding/
+
+5. Open the link in a private/incognito browser window or on a phone to confirm
+   that a visitor can reach it without being signed into GitHub. Check the home,
+   About, Projects, Safety, and Contact pages; test the phone and WhatsApp links.
+6. Send the published Pages URL to the client for review. Do not send the GitHub
+   repository URL as the website preview link.
+
+UPDATING THE REVIEW SITE
+------------------------
+After making and saving website changes, use PowerShell in the project folder:
+
+       git add -A
+       git commit -m "Describe the website update"
+       git push
+
+The workflow runs again automatically. Wait for the new run to pass before
+sharing the updated site with the client. The Pages address stays the same.
+
+TROUBLESHOOTING
+---------------
+• No workflow run appears: confirm the push was to main or master and that
+  .github/workflows/deploy.yml exists in the repository.
+• The workflow cannot publish: check Settings > Pages and make sure Source is
+  GitHub Actions. In Settings > Actions > General, ensure repository actions and
+  workflow permissions allow the workflow to run with its declared permissions.
+• Workflow fails while building: open the failed run in Actions and read the
+  build log. Fix the reported source or dependency issue, then commit and push.
+• The link shows a 404 immediately after the first deploy: confirm the workflow
+  succeeded, wait a few minutes for Pages to become available, and verify the
+  URL includes /matxo-holding/ after the owner's github.io domain.
+• Images or internal links are missing: confirm the deployed commit includes the
+  repository-aware base paths in astro.config.mjs and src/utils/site.ts.
+• A new owner/account URL is used: push from this project's repository. The
+  workflow detects the owner and repository name while building the website.
+
+IMPORTANT BEFORE CLIENT REVIEW
+------------------------------
+This is a review deployment. Confirm that Matxo approves the displayed business
+details, phone/WhatsApp number, service wording, images, and any project claims
+before treating the site as the final public business website. Replace any
+illustrative or placeholder material with approved real company information.
+
+DEPLOYMENT FILES IN THIS PROJECT
+-------------------------------
+.github/workflows/deploy.yml   GitHub Actions build and publishing workflow
+astro.config.mjs               Repository-aware GitHub Pages configuration
+src/utils/site.ts              Correct base paths for links and image assets
+README.md                      Project overview and short deployment summary

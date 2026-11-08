@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteBase } from '../utils/site';
+
+const projectAreas = [
+  {
+    title: 'Window & glass care',
+    description: 'Window cleaning, glass maintenance and replacement planned around the building and the glass involved.',
+    services: 'Window cleaning · Glass maintenance',
+  },
+  {
+    title: 'Painting & finishes',
+    description: 'Painting and wall finishing for the areas and surfaces included in the agreed scope.',
+    services: 'Painting · Wall finishes',
+  },
+  {
+    title: 'Sealing & crack repair',
+    description: 'Silicone and crack repair enquiries begin with a discussion of the affected area and site conditions.',
+    services: 'Silicone · Crack repair',
+  },
+  {
+    title: 'Signage & lighting',
+    description: 'Signage and light solutions shaped around the location, access needs and project requirements.',
+    services: 'Signage · Light solutions',
+  },
+  {
+    title: 'Work at height',
+    description: 'Cleaning and maintenance for elevated areas, with access and site coordination considered.',
+    services: 'Height access · Building care',
+  },
+  {
+    title: 'Combined maintenance',
+    description: 'Bring several building care needs into one enquiry so the scope can be discussed together.',
+    services: 'Multiple services · Site assessment',
+  },
+];
+---
+
+<Layout
+  title="Projects | Matxo Holdings"
+  description="Explore the kinds of building cleaning and maintenance work Matxo Holdings can help plan."
+>
+  <SiteHeader active="projects" />
+
+  <main class="projects-page">
+    <section class="projects-hero shell" aria-labelledby="projects-title">
+      <div class="projects-hero-copy">
+        <p class="section-kicker"><span></span> PROJECTS &amp; WORK TYPES</p>
+        <h1 id="projects-title">One building.<br />Different needs.<br /><em>A considered plan.</em></h1>
+        <p>Building work can involve cleaning, repairs, finishes, glass, signage or access at height. Matxo can discuss the scope, site conditions and practical next steps for the work you have in mind.</p>
+        <a class="button button-red" href={`${siteBase}contact`}>Discuss a project <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="projects-hero-visual">
+        <img src={`${siteBase}images/matxo-window-technician.jpg`} alt="Technician working on a building window using access and safety equipment" />
+        <div class="project-photo-caption"><span class="project-caption-mark">M</span><span><strong>Cleaning &amp; maintenance</strong><small>Work planned for the site</small></span></div>
+      </div>
+    </section>
+
+    <section class="project-areas-section" aria-labelledby="project-areas-title">
+      <div class="shell">
+        <div class="project-areas-heading">
+          <div><p class="section-kicker"><span></span> AREAS OF WORK</p><h2 id="project-areas-title">What are you<br /><em>planning?</em></h2></div>
+          <p>Use these work areas to start the conversation. The right scope depends on the building, the work requested and the conditions on site.</p>
+        </div>
+        <div class="project-area-grid">
+          {projectAreas.map((area, index) => (
+            <article class="project-area-card">
+              <div class="project-area-top"><span>0{index + 1}</span><span class="project-area-arrow" aria-hidden="true">↗</span></div>
+              <h3>{area.title}</h3>
+              <p>{area.description}</p>
+              <small>{area.services}</small>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="project-brief-section">
+      <div class="shell project-brief-inner">
+        <div><p class="section-kicker"><span></span> GETTING STARTED</p><h2>A few details help<br /><em>shape the scope.</em></h2></div>
+        <div class="project-brief-copy">
+          <p>When you get in touch, share the building location, the service you need, preferred timing and any access considerations. Photos can also help explain the areas involved.</p>
+          <a class="button button-red" href={`${siteBase}contact`}>Start an enquiry <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</Layout>

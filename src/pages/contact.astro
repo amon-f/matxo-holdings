@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout
+  title="Request a Quote | Matxo Holdings"
+  description="Contact Matxo Holdings to discuss building cleaning and maintenance services or request a site assessment."
+>
+  <SiteHeader active="contact" />
+
+  <main class="contact-page">
+    <div class="shell contact-page-inner">
+      <div class="contact-page-heading">
+        <p class="section-kicker"><span></span> CONTACT MATXO</p>
+        <h1>Let’s talk about<br /><em>your building.</em></h1>
+        <p>Tell us what you need and where the work is. We’ll use the details to understand your enquiry and discuss a practical next step.</p>
+      </div>
+
+      <div class="contact-content">
+        <section class="contact-form-panel" aria-labelledby="enquiry-title">
+          <h2 id="enquiry-title">Request a quote</h2>
+          <p class="form-intro">Complete the details below, then review your message in WhatsApp before sending it to Matxo.</p>
+          <form id="enquiry-form">
+            <div class="form-row">
+              <label>Full name <span>*</span><input name="name" autocomplete="name" required placeholder="Your name" /></label>
+              <label>Phone number <span>*</span><input name="phone" type="tel" autocomplete="tel" required placeholder="Your contact number" /></label>
+            </div>
+            <div class="form-row">
+              <label>Email address <small>(optional)</small><input name="email" type="email" autocomplete="email" placeholder="you@example.com" /></label>
+              <label>Service needed <span>*</span>
+                <select name="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="window-cleaning">Window cleaning</option>
+                  <option value="painting-wall-finishes">Painting &amp; wall finishes</option>
+                  <option value="silicone-crack-repair">Silicone &amp; crack repair</option>
+                  <option value="glass-replacement-maintenance">Glass replacement &amp; maintenance</option>
+                  <option value="signage-light-solutions">Signage &amp; light solutions</option>
+                  <option value="work-at-height">Work at height</option>
+                  <option value="other">Other / not sure</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-row">
+              <label>Site location <span>*</span><input name="location" autocomplete="address-level2" required placeholder="Town or area" /></label>
+              <label>Preferred timing <small>(optional)</small><input name="timing" placeholder="When would you like the work?" /></label>
+            </div>
+            <label>Tell us a little about the work <span>*</span><textarea name="details" required rows="4" placeholder="Describe the building and what you need help with"></textarea></label>
+            <button class="button button-red form-submit" type="submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
+            <p class="form-privacy">This opens WhatsApp with your details in a message. Review them there before choosing whether to send the message to Matxo.</p>
+          </form>
+        </section>
+
+        <aside class="contact-direct" aria-label="Contact Matxo directly">
+          <p class="contact-direct-kicker">PREFER TO CONTACT US DIRECTLY?</p>
+          <h2>Speak with Matxo.</h2>
+          <p>Call the number shown below. If Matxo has WhatsApp on this number, you can also start a message there.</p>
+          <a class="direct-phone" href="tel:+254723234846"><span class="direct-phone-icon" aria-hidden="true">☎</span><span><small>CALL MATXO HOLDINGS</small><strong>0723 234 846</strong></span><span class="direct-arrow" aria-hidden="true">↗</span></a>
+          <a class="direct-whatsapp" href="https://wa.me/254723234846" target="_blank" rel="noreferrer">Open WhatsApp <span aria-hidden="true">↗</span></a>
+          <div class="contact-direct-foot"><span class="direct-check" aria-hidden="true">✓</span><span>Share the service, site location, and any access or scheduling details you already know.</span></div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <SiteFooter />
+</Layout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#enquiry-form');
+  const serviceField = form?.elements.namedItem('service') as HTMLSelectElement | null;
+  const serviceFromLink = new URLSearchParams(window.location.search).get('service');
+  if (serviceField && serviceFromLink && [...serviceField.options].some((option) => option.value === serviceFromLink)) {
+    serviceField.value = serviceFromLink;
+  }
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const values = new FormData(form);
+    const message = [
+      'Hello Matxo Holdings, I would like to request a quote.',
+      '',
+      `Name: ${values.get('name')}`,
+      `Phone: ${values.get('phone')}`,
+      values.get('email') ? `Email: ${values.get('email')}` : '',
+      `Service: ${serviceField?.selectedOptions[0]?.textContent ?? values.get('service')}`,
+      `Site location: ${values.get('location')}`,
+      values.get('timing') ? `Preferred timing: ${values.get('timing')}` : '',
+      `Details: ${values.get('details')}`,
+    ].filter(Boolean).join('\n');
+    const whatsappUrl = `https://wa.me/254723234846?text=${encodeURIComponent(message)}`;
+    window.location.assign(whatsappUrl);
+  });
+</script>

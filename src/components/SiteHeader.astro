@@ -1,0 +1,55 @@
+---
+interface Props {
+  active?: string;
+}
+
+import { siteBase as base } from '../utils/site';
+const { active = '' } = Astro.props;
+const navItems = [
+  { key: 'home', label: 'Home', href: base },
+  { key: 'services', label: 'Services', href: `${base}#services` },
+  { key: 'safety', label: 'Safety', href: `${base}#safety` },
+  { key: 'projects', label: 'Projects', href: `${base}projects` },
+  { key: 'about', label: 'About', href: `${base}about` },
+];
+---
+
+<div class="topline">
+  <div class="shell topline-inner">
+    <span>Cleaning &amp; maintenance services</span>
+    <a href="tel:+254723234846">Call 0723 234 846 <span aria-hidden="true">↗</span></a>
+  </div>
+</div>
+<header class="site-header">
+  <div class="shell nav-wrap">
+    <a class="brand" href={base} aria-label="Matxo Holdings home">
+      <span class="brand-roof" aria-hidden="true"></span>
+      <span class="brand-name">MATXO</span>
+      <span class="brand-sub">HOLDINGS LTD</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      {navItems.map((item) => <a href={item.href} class={active === item.key ? 'active' : undefined} aria-current={active === item.key ? 'page' : undefined}>{item.label}</a>)}
+    </nav>
+    <details class="mobile-menu">
+      <summary aria-label="Site menu">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" /></svg>
+        <span>Menu</span>
+      </summary>
+      <nav class="mobile-menu-panel" aria-label="Mobile navigation">
+        {navItems.map((item) => <a href={item.href} class={active === item.key ? 'active' : undefined} aria-current={active === item.key ? 'page' : undefined}>{item.label}</a>)}
+        <a class="mobile-quote-link" href={`${base}contact`}>Request a quote <span aria-hidden="true">↗</span></a>
+      </nav>
+    </details>
+    <a class="button button-small button-red nav-cta" href={`${base}contact`}>Request a quote <span aria-hidden="true">↗</span></a>
+    <a class="mobile-call" href="tel:+254723234846" aria-label="Call Matxo Holdings">Call</a>
+  </div>
+</header>
+
+<script>
+  document.querySelectorAll('.mobile-menu-panel a').forEach((link) => {
+    link.addEventListener('click', () => {
+      const menu = link.closest('details');
+      if (menu) menu.open = false;
+    });
+  });
+</script>

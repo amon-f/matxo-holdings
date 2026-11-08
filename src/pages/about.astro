@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteBase } from '../utils/site';
+---
+
+<Layout
+  title="About Matxo Holdings | Building Cleaning and Maintenance"
+  description="Learn about Matxo Holdings and its building cleaning and maintenance services."
+>
+  <SiteHeader active="about" />
+
+  <main class="about-page">
+    <section class="about-hero shell" aria-labelledby="about-title">
+      <div class="about-hero-copy">
+        <p class="section-kicker"><span></span> ABOUT MATXO HOLDINGS</p>
+        <h1 id="about-title">Practical care<br />for the places<br /><em>people rely on.</em></h1>
+        <p>Matxo Holdings Ltd provides cleaning and maintenance services for buildings. From glass care and painting to repairs, signage and work at height, we help clients plan the work their buildings need.</p>
+        <a class="button button-red" href={`${siteBase}contact`}>Talk to Matxo <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="about-hero-image">
+        <img src={`${siteBase}images/matxo-window-technician.jpg`} alt="Matxo technician working on a building window using access and safety equipment" />
+        <span>Clean spaces.<br /><strong>Safer places.</strong></span>
+      </div>
+    </section>
+
+    <section class="about-purpose" aria-labelledby="purpose-title">
+      <div class="shell about-purpose-inner">
+        <div>
+          <p class="section-kicker"><span></span> OUR PURPOSE</p>
+          <h2 id="purpose-title">Care for the building.<br /><em>Respect the site.</em></h2>
+        </div>
+        <div class="about-purpose-copy">
+          <p>Every building has its own surfaces, access needs and day-to-day activity. A useful maintenance conversation starts with understanding the job and the site, then agreeing what needs to happen next.</p>
+          <p>Matxo brings several building care services into one conversation, helping clients define the scope before they plan the work.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-principles shell" aria-labelledby="principles-title">
+      <div class="about-principles-heading">
+        <p class="section-kicker"><span></span> HOW WE APPROACH THE WORK</p>
+        <h2 id="principles-title">Clear from the<br /><em>first conversation.</em></h2>
+      </div>
+      <div class="principle-grid">
+        <article class="principle-card"><span>01</span><h3>Understand the need</h3><p>Start with the service, building location, and areas that need attention.</p></article>
+        <article class="principle-card"><span>02</span><h3>Consider the site</h3><p>Discuss access, site conditions, and any scheduling or coordination needs.</p></article>
+        <article class="principle-card"><span>03</span><h3>Agree the scope</h3><p>Clarify the requested work and the practical next steps for the project.</p></article>
+      </div>
+    </section>
+
+    <section class="about-cta">
+      <div class="shell about-cta-inner">
+        <p>Professional <span>·</span> Reliable <span>·</span> Safe</p>
+        <h2>Let’s discuss what your building needs.</h2>
+        <a class="button button-light" href={`${siteBase}contact`}>Request a quote <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</Layout>
