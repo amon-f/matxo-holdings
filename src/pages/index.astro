@@ -2,76 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { clients } from '../data/clients';
+import { services } from '../data/services';
 import { siteBase } from '../utils/site';
-
-const services = [
-  {
-    slug: 'window-cleaning',
-    title: 'Window cleaning',
-    description: 'Cleaning for building windows and glazed areas, planned around the access and conditions at each site.',
-  },
-  {
-    slug: 'painting-wall-finishes',
-    title: 'Painting & wall finishes',
-    description: 'Painting and finishing work to refresh and care for interior or exterior building surfaces.',
-  },
-  {
-    slug: 'silicone-crack-repair',
-    title: 'Silicone & crack repair',
-    description: 'Repair and resealing for applicable cracks and joints, following an assessment of the affected area.',
-  },
-  {
-    slug: 'glass-replacement-maintenance',
-    title: 'Glass replacement & maintenance',
-    description: 'Glass maintenance and replacement, with the requirements confirmed for the building and glass type.',
-  },
-  {
-    slug: 'signage-light-solutions',
-    title: 'Signage & light solutions',
-    description: 'Signage and lighting work scoped to the needs of the site and the project.',
-  },
-  {
-    slug: 'work-at-height',
-    title: 'Work at height',
-    description: 'Cleaning and maintenance for elevated areas, planned around the building and its access needs.',
-  },
-];
-
-const clients = [
-  { name: 'National Youth Service', logo: 'national-youth-service.webp' },
-  { name: 'Republic of Kenya', logo: 'government-of-kenya.webp' },
-  { name: 'The Mater Hospital', logo: 'mater-hospital.webp' },
-  { name: 'The Panari Residence', logo: 'panari-residence.webp' },
-  { name: 'Eka Hotel', logo: 'eka-hotel.webp' },
-  { name: 'Elite Ventures Ltd', logo: 'elite-ventures.webp' },
-  { name: 'Naivas', logo: 'naivas.webp' },
-  { name: 'The Panari Hotel Nairobi', logo: 'panari-hotel.webp' },
-  { name: 'The Panari Resort Nyahururu', logo: 'panari-resort.webp' },
-  { name: 'Crowne Plaza', logo: 'crowne-plaza.webp' },
-  { name: 'Australian High Commission Kenya', logo: 'australian-high-commission.webp' },
-  { name: 'Aga Khan University Hospital', logo: 'aga-khan-hospital.webp' },
-  { name: 'The Boma Hotels', logo: 'boma-hotels.webp' },
-  { name: 'ibis Styles', logo: 'ibis-styles.webp' },
-  { name: 'Weston Hotel', logo: 'weston-hotel.webp' },
-  { name: 'Ebony Estates', logo: 'ebony-estates.webp' },
-  { name: 'Parklands Sports Club', logo: 'parklands-sports-club.webp' },
-  { name: 'SOUS Chef', logo: 'sous-chef.webp' },
-  { name: 'Four Points by Sheraton', logo: 'four-points-sheraton.webp' },
-  { name: 'Kabarak University', logo: 'kabarak-university.webp' },
-  { name: 'Laico Regency Nairobi', logo: 'laico-regency.webp' },
-  { name: 'Big Square', logo: 'big-square.webp' },
-  { name: 'Tamarind Tree Hotel', logo: 'tamarind-tree-hotel.webp' },
-  { name: 'Mövenpick Hotel & Residences Nairobi', logo: 'movenpick-nairobi.webp' },
-  { name: 'The Karen Hospital', logo: 'karen-hospital.webp' },
-  { name: 'The Emory Hotel', logo: 'emory-hotel.webp' },
-  { name: 'Radisson Blu Hotel Nairobi Upper Hill', logo: 'radisson-blu-upper-hill.webp' },
-  { name: 'Waridi Paradise Apartment Hotel', logo: 'waridi-paradise.webp' },
-  { name: 'Golden Tulip Westlands Nairobi', logo: 'golden-tulip.webp' },
-  { name: 'The Great Rift Valley Lodge & Golf Resort', logo: 'great-rift-valley-lodge.webp' },
-  { name: 'MGM Muthu Hotels Kenya', logo: 'mgm-muthu-hotels.webp' },
-  { name: 'Sunstar Hotel Nairobi', logo: 'sunstar-hotel.webp' },
-  { name: 'EHOMESCOPE Properties Limited', logo: 'ehomescope-properties.webp' },
-];
 ---
 
 <Layout>
@@ -96,7 +29,7 @@ const clients = [
       </div>
 
       <div class="hero-visual">
-        <img src={`${siteBase}images/matxo-window-technician.jpg`} alt="Matxo technician carrying out window work using safety equipment" />
+        <img src={`${siteBase}images/matxo-window-technician.jpg`} alt="Matxo technician carrying out window work using safety equipment" fetchpriority="high" />
         <div class="image-wash" aria-hidden="true"></div>
         <div class="photo-label">
           <span class="photo-label-icon" aria-hidden="true">↗</span>

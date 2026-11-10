@@ -1,9 +1,55 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteBase } from '../utils/site';
 ---
 
-<Layout title="Safety | Matxo">
-	<main>
-		<h1>Safety</h1>
-	</main>
+<Layout
+  title="Safety | Matxo Holdings"
+  description="Learn how Matxo plans building cleaning and maintenance work around each site's access, requirements, and coordination needs."
+>
+  <SiteHeader active="safety" />
+
+  <main>
+    <section class="safety-section safety-page-section" aria-labelledby="safety-title">
+      <div class="shell safety-inner">
+        <div class="safety-copy">
+          <p class="safety-kicker"><span class="safety-shield" aria-hidden="true">✓</span> SAFETY IN EVERY STEP</p>
+          <h1 id="safety-title">Good work<br />starts with a<br /><span>safe plan.</span></h1>
+          <p class="safety-intro">Every building brings different access, surfaces, and activity. We start by understanding the site and requested work, then agree the scope and coordination needed before scheduling.</p>
+          <a class="button button-red" href={`${siteBase}contact`}>Arrange a site assessment <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <div class="safety-process" aria-label="How Matxo plans building work">
+          <article class="safety-step">
+            <span class="safety-step-number">01</span>
+            <div><h2>Understand the site</h2><p>Discuss the building, the areas involved, access needs, and any site requirements.</p></div>
+            <span class="safety-step-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="safety-step">
+            <span class="safety-step-number">02</span>
+            <div><h2>Define the work</h2><p>Clarify the requested service, work area, and what needs to be agreed before starting.</p></div>
+            <span class="safety-step-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="safety-step">
+            <span class="safety-step-number">03</span>
+            <div><h2>Coordinate next steps</h2><p>Confirm timing and practical arrangements with the client for the specific site.</p></div>
+            <span class="safety-step-arrow" aria-hidden="true">↗</span>
+          </article>
+          <p class="safety-note"><span aria-hidden="true">+</span> Share site access details and any scheduling constraints when you get in touch.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-cta">
+      <div class="shell about-cta-inner">
+        <p>PROFESSIONAL <span>·</span> RELIABLE <span>·</span> SAFETY-MINDED</p>
+        <h2>Let’s discuss the right plan for your building.</h2>
+        <a class="button button-light" href={`${siteBase}contact`}>Talk to Matxo <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
 </Layout>

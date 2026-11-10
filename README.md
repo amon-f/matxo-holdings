@@ -7,10 +7,14 @@ An Astro website for Matxo.
 ```text
 public/
   images/
+    clients/
     logo/
     team/
     projects/
 src/
+  data/
+    clients.ts
+    services.ts
   content/
     services/
     projects/
@@ -25,6 +29,8 @@ src/
     services/
   styles/
     global.css
+scripts/
+  verify-site.mjs
 ```
 
 ## Commands
@@ -34,7 +40,18 @@ src/
 | `npm install` | Install dependencies |
 | `npm run dev` | Start the local development server |
 | `npm run build` | Build the production site into `dist/` |
+| `npm run check:site` | Verify built pages, client logos, sitemap, and robots.txt |
 | `npm run preview` | Preview the production build |
+
+Page titles and descriptions are configured per page. The shared layout adds
+canonical URLs and social preview metadata, while the sitemap and robots file
+are generated during the build. GitHub Pages builds use the repository name as
+the base path. To build for a custom domain, set `PUBLIC_SITE_URL` to the
+site's origin (for example, `https://www.example.com`); this switches the
+generated site to the domain root instead of the GitHub Pages project path.
+
+The deployment workflow runs the site smoke check after the production build.
+Run `npm run build` followed by `npm run check:site` before deploying manually.
 
 ## Deploying a review site with GitHub Pages
 

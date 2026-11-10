@@ -18,6 +18,8 @@ jobs:
         uses: actions/checkout@v5
       - name: Build and upload site
         uses: withastro/action@v5
+      - name: Verify built pages and assets
+        run: npm run check:site
 
   deploy:
     needs: build

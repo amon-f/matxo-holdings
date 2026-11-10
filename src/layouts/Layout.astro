@@ -11,6 +11,17 @@ const {
   title = 'Matxo Holdings | Building Cleaning and Maintenance',
   description = 'Building cleaning and maintenance services from Matxo Holdings. Clean spaces, safer places, a healthier tomorrow.',
 } = Astro.props;
+const basePath = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname.startsWith(basePath)
+  ? Astro.url.pathname.slice(basePath.length)
+  : Astro.url.pathname;
+const pagePath = pathname.replace(/^\/+|\/+$/g, '');
+const canonicalUrl = Astro.site
+  ? new URL(`${siteBase}${pagePath ? `${pagePath}/` : ''}`, Astro.site).href
+  : undefined;
+const socialImage = Astro.site
+  ? new URL(`${siteBase}images/matxo-window-technician.jpg`, Astro.site).href
+  : undefined;
 ---
 
 <!doctype html>
@@ -20,6 +31,17 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#d71920" />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_KE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
     <link rel="icon" type="image/svg+xml" href={`${siteBase}favicon.svg`} />
     <title>{title}</title>
   </head>
@@ -27,4 +49,3 @@ const {
     <slot />
   </body>
 </html>
-
